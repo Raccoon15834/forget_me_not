@@ -6,27 +6,25 @@ void main() {
 
 //Try hot reload
 class MyApp extends StatelessWidget {
-  const MyApp({super.key}); //when making a widget, override build method that constructs the widget
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //material app is usually root widget type, set 3 attributes, 3 commas?
-      title: 'Flutter Demo',
+      title: 'Welcome Page',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'), //home attribute
+      home: const MyHomePage(username: 'Bob'), //home attribute
     );
   }
 }
 
 class MyHomePage extends StatefulWidget { //stateful widgets always have final (nonmutable?) vars
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.username});
+  final String username;
 
-  final String title;
-  //was the title parameter passed, this var?
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -34,48 +32,26 @@ class MyHomePage extends StatefulWidget { //stateful widgets always have final (
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  nextpage(){
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
   }
-  //myHomePage stateful widget is gonna be a Scaffold (in essence containing a TON of other widgets
-  //you set all stateful widget stuff in the State<customWidgetName>
+  String welcomeText = 'Welcome'+widget.username+' Today is ';
+  var welcomeWidget = Text(welcomeText, style: TextStyle(color:Color.green, size:100.0));
+  var gobutton = ElevatedButton(onPressed: nextpage, child: Text('Let\'s Go!'));
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold( //scaffold has an appbar AND body with widgetlist
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object THE TITLE!!!
-        title: Text(widget.title),
+        title: Text('Welcome Page (1)'),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      body: Align(
+        alignment: Alignment.center,
         child: Column(
-          //Column is also a layout widget. It takes a list of children and arranges them vertically.
-
-          mainAxisAlignment: MainAxisAlignment.center,
-          //widget children array
-          //to make an array, define type first
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',//use dollar sign and then variable in text
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],//finishes the array of widgets
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+          children: <widget>[welcomeWidget,gobutton]
+        )
+      )
     );
   }
 }
