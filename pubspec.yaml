@@ -74,6 +74,18 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: Lora
+      fonts:
+        - asset: assets/Lora-Regular.ttf
+        - asset: assets/Lora-Italic.ttf
+          style: italic
+    - family: Bakery
+      fonts:
+        - asset: assets/bakery.otf
+    - family: Orchard
+      fonts:
+        - asset: assets/Orchard Free.otf
   # fonts:
   #   - family: Schyler
   #     fonts:
